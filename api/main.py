@@ -4,7 +4,6 @@ import joblib
 
 app = FastAPI()
 
-# Allow all origins for testing; in production, limit to trusted domains
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Change this to specific domains in production (e.g., ["http://localhost:3000"])
@@ -94,7 +93,7 @@ async def predict(input_data: PredictionInput):
 
     # Return the predicted class and probabilities
     return {
-        "predicted_class": int(prediction[0]),  # Assuming binary classification
+        "predicted_class": int(prediction[0]),  # binary classification
         "probabilities": prediction_proba[0].tolist(),  # Convert numpy array to list
-        "scaled_features": feature_value_pairs  # Add this for debug info in the response
+        "scaled_features": feature_value_pairs  # Added for debug info in the response
     }
